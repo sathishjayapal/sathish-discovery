@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: "eurekaserver"
+  config:
+    fail-fast: true
+    import: "optional:configserver:http://Sathish:Pass@localhost:8888?fail-fast=true&max-attempts=10&max-interval=1500&multiplier=1.2&initial-interval=1100"
