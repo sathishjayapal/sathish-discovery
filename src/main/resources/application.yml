@@ -1,6 +1,23 @@
 spring:
   application:
     name: "eurekaserver"
+  cloud:
+    config:
+      username: ${configserverusername}
+      password: ${configserverpassword}
   config:
     fail-fast: true
-    import: "optional:configserver:http://Sathish:Pass@localhost:8888?fail-fast=true&max-attempts=10&max-interval=1500&multiplier=1.2&initial-interval=1100"
+    import: "optional:configserver:http://localhost:8888?fail-fast=true&max-attempts=10&max-interval=1500&multiplier=1.2&initial-interval=1100"
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceURL:
+      defaultZone: http://sathish:pass@localhost:8070/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
