@@ -19,17 +19,20 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig {
     final BasicAuthBean environment;
+
     @Value("${spring.security.debug:true}")
     boolean securityDebug;
+
     public WebSecurityConfig(BasicAuthBean environment) {
         this.environment = environment;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/eureka/**")))
-                .authorizeRequests().anyRequest().authenticated();
+        http.csrf(csrf -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/eureka/**")))
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated();
         return http.build();
     }
 
@@ -61,5 +64,4 @@ public class WebSecurityConfig {
                         .ignoring()
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
     }
-
 }
